@@ -8,7 +8,7 @@ from utils.load_config import load_yaml
 import warnings
 warnings.filterwarnings("ignore")
 
-def get_args():
+def get_args(): #获取实验配置信息
     parser = argparse.ArgumentParser(description='MuSc')
     parser.add_argument('--config', type=str, default='./configs/musc.yaml', help='config file path')
     parser.add_argument('--data_path', type=str, default=None, help='dataset path')
@@ -27,7 +27,7 @@ def get_args():
     args = parser.parse_args()
     return args
 
-def load_args(cfg, args):
+def load_args(cfg, args): #解析配置信息
     # If input new arguments through the script (musc.sh), the default configuration in the config file (musc.yaml) will be overwritten.
     if args.data_path is not None:
         cfg['datasets']['data_path'] = args.data_path
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     cfg = load_yaml(args.config)
     cfg = load_args(cfg, args)
     print(cfg)
-    seed = 42
+    seed = 42 #设置seed
     model = MuSc(cfg, seed=seed)
     model.main()
 
